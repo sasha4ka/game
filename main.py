@@ -1,18 +1,17 @@
 import pygame
 from object import Object
+from objects_list import objects_list
 
-class objects_list:
-    def __init__(self, master):
-        self.master = master
-
-    def add_object(self, object: Object) -> int:
-        pass
-
-    def remove_object(self, id: int):
-        pass
-
-    def get_hold(self):
-        return self.master.get_hold()
+class handler:
+    def __init__(self, criteria: int, payload: function):
+        self.criteria = criteria
+        self.payload = payload
+    
+    def test(self, event):
+        return self.criteria == event
+    
+    def run(self, event, frame):
+        self.payload(event, frame)
 
 class game:
     def __init__(self, size, title):
@@ -27,15 +26,24 @@ class game:
         self.last_pos = [0, 0]
         self.hold = [False, False, False]
 
-        self.objects = []
+        self.objects = objects_list()
+        self.handlers = []
 
     def update(self, frame: int):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                0/0
+
+            for handler in self.handlers:
+                if not handler.test(event.type): continue
+                handler.run(event, frame)
+
         self.pos = self.last_pos
         self.pos = pygame.mouse.get_pos()
 
         self.hold = pygame.mouse.get_pressed()
 
-        self.update_objects()
+        self.update_objects(frame)
         self.draw_objects()
 
     def update_objects(self, frame: int):
@@ -52,3 +60,6 @@ class game:
 
     def get_hold(self):
         return self.hold
+    
+    def add_handler(self, handler: handler):
+        self.handlers.append(handler)
