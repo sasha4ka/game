@@ -9,14 +9,23 @@ class objects_list:
     def add_object(self, object: Object) -> int:
         object.master = self
         self.object_list.append(object)
+        object.on_master_initilazed()
 
     def remove_object(self, id: int):
         pass
 
-    def get_hold_mouse(self):
+    def get_active_object(self) -> Object:
+        active = None
+        for obj in self.object_list:
+            if not obj.active: continue
+            active = obj
+        
+        return active
+
+    def get_hold_mouse(self) -> list:
         return self.master.get_hold_mouse()
     
-    def get_hold_keys(self):
+    def get_hold_keys(self) -> list:
         return self.master.get_hold_keys()
     
     def add_handler(self, handler: handler):
