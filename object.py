@@ -6,15 +6,13 @@ class Object:
         self.color = color
         self.speed = speed
         self.type = type
+        self.master = None
     
     def draw(self, win: pygame.surface):
-        pass
+        pygame.draw.rect(win, self.color, self.pos)
 
     def update(self, frame: int):
         pass
 
     def mouse(self, mouse_pos: list):
-        pass
-
-    def click(self, mouse_pos: list, mouse_button: list):
         pass
