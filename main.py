@@ -1,6 +1,7 @@
 import pygame
 import objects_list
-from object import Object, Player
+from object import Object
+from player import Player
 from handler import handler
 
 class game:
@@ -84,7 +85,7 @@ class game:
             self.clock.tick(self.framerate)
 
 def main():
-    main_game = game((400, 400), "game", 20)
+    main_game = game((800, 800), "game", 20)
     obj = Player([175, 175, 50, 50], (255, 0, 0))
     main_game.add_object(obj)
     obj = Object([0, 0, 50, 50], (0, 0, 0))
