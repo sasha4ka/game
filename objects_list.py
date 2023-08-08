@@ -16,6 +16,9 @@ class objects_list:
     def get_hold_mouse(self):
         return self.master.get_hold_mouse()
     
+    def get_mouse_pos(self):
+        return self.master.get_mouse_pos()
+    
     def get_hold_keys(self):
         return self.master.get_hold_keys()
     

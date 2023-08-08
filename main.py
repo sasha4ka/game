@@ -77,6 +77,9 @@ class game:
     
     def add_object(self, object: Object):
         self.objects.add_object(object)
+    
+    def get_mouse_pos(self):
+        return [self.pos, self.last_pos]
 
     def start(self):
         while True:
