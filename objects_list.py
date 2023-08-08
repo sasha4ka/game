@@ -28,6 +28,12 @@ class objects_list:
     def get_hold_keys(self) -> list:
         return self.master.get_hold_keys()
     
+    def get_framerate(self) -> int:
+        return self.master.get_framerate()
+    
+    def get_screensize(self) -> list:
+        return self.master.get_screensize()
+    
     def add_handler(self, handler: handler):
         self.master.add_handler(handler)
     

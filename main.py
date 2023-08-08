@@ -61,6 +61,12 @@ class game:
     
     def get_hold_keys(self):
         return self.hold_keys
+
+    def get_framerate(self):
+        return self.framerate
+    
+    def get_screensize(self):
+        return self.size
     
     def add_handler(self, handler: handler):
         self.handlers.append(handler)
@@ -68,19 +74,19 @@ class game:
     def add_object(self, object: Object):
         self.objects.add_object(object)
 
-    def start(self):
+    def mainloop(self):
         while True:
             self.update(self.frame)
             self.frame = (self.frame + 1) % self.framerate
             self.clock.tick(self.framerate)
 
 def main():
-    main_game = game((400, 400), "game", 20)
+    main_game = game((400, 400), "game", 10)
     obj = Player([175, 175, 50, 50], (255, 0, 0))
     main_game.add_object(obj)
     obj = Object([0, 0, 50, 50], (0, 0, 0))
     main_game.add_object(obj)
-    main_game.start()
+    main_game.mainloop()
 
 if __name__ == "__main__":
     main()
