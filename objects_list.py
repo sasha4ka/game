@@ -9,11 +9,20 @@ class objects_list:
     def add_object(self, object: Object) -> int:
         object.master = self
         self.object_list.append(object)
+        object.on_master_initilazed()
 
     def remove_object(self, id: int):
         pass
 
-    def get_hold_mouse(self):
+    def get_active_object(self) -> Object:
+        active = None
+        for obj in self.object_list:
+            if not obj.active: continue
+            active = obj
+        
+        return active
+
+    def get_hold_mouse(self) -> list:
         return self.master.get_hold_mouse()
     
     def get_mouse_pos(self):
@@ -21,6 +30,12 @@ class objects_list:
     
     def get_hold_keys(self):
         return self.master.get_hold_keys()
+    
+    def get_framerate(self) -> int:
+        return self.master.get_framerate()
+    
+    def get_screensize(self) -> list:
+        return self.master.get_screensize()
     
     def add_handler(self, handler: handler):
         self.master.add_handler(handler)

@@ -1,17 +1,7 @@
 import pygame
 import objects_list
-from object import Object
-
-class handler:
-    def __init__(self, criteria: int, payload):
-        self.criteria = criteria
-        self.payload = payload
-    
-    def test(self, event):
-        return self.criteria == event
-    
-    def run(self, event, frame):
-        self.payload(event, frame)
+from object import Object, Player
+from handler import handler
 
 class game:
     def __init__(self, size, title, framerate=20):
@@ -71,6 +61,12 @@ class game:
     
     def get_hold_keys(self):
         return self.hold_keys
+
+    def get_framerate(self):
+        return self.framerate
+    
+    def get_screensize(self):
+        return self.size
     
     def add_handler(self, handler: handler):
         self.handlers.append(handler)
@@ -81,17 +77,19 @@ class game:
     def get_mouse_pos(self):
         return [self.pos, self.last_pos]
 
-    def start(self):
+    def mainloop(self):
         while True:
             self.update(self.frame)
             self.frame = (self.frame + 1) % self.framerate
             self.clock.tick(self.framerate)
 
 def main():
-    main_game = game((400, 400), "game", 20)
-    obj = Object([175, 175, 50, 50], (255, 0, 0), 0)
+    main_game = game((400, 400), "game", 10)
+    obj = Player([175, 175, 50, 50], (255, 0, 0))
     main_game.add_object(obj)
-    main_game.start()
+    obj = Object([0, 0, 50, 50], (0, 0, 0))
+    main_game.add_object(obj)
+    main_game.mainloop()
 
 if __name__ == "__main__":
     main()
