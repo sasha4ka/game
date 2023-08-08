@@ -39,6 +39,25 @@ class objects_list:
     
     def add_handler(self, handler: handler):
         self.master.add_handler(handler)
+
+    def get_platform_collide_list(self, object):
+        collide_list = []
+
+        for test_object in self.object_list:
+            if not test_object.test_platform_collide(object): continue
+            collide_list.append(test_object)
+        
+        return collide_list
+    
+    def get_collide_list(self, object):
+        collide_list = []
+
+        for test_object in self.object_list:
+            if not test_object.test_collide(object): continue
+            if test_object is object: continue
+            collide_list.append(test_object)
+        
+        return collide_list
     
     class objects_list_iterator:
         def __init__(self, objects: list):

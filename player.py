@@ -16,10 +16,15 @@ class Player(Object):
 
         self.onGround = False
         self.gravspeed = 0
+
+        self.title = "Player"
     
     def update(self, frame: int):
         self.move()
         
+        if frame == 0 and self.master.get_platform_collide_list(self):
+            print(f"Collide!")
+
         self.gravity(frame)
         self.rect.top += self.gravspeed
 

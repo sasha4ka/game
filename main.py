@@ -88,7 +88,7 @@ def main():
     main_game = game((800, 800), "game", 20)
     obj = Player([175, 175, 50, 50], (255, 0, 0))
     main_game.add_object(obj)
-    obj = Object([0, 0, 50, 50], (0, 0, 0))
+    obj = Object([0, 750, 50, 50], (0, 0, 0))
     main_game.add_object(obj)
     main_game.mainloop()
 
