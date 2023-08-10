@@ -25,6 +25,8 @@ class game:
         self.framerate = framerate
         self.clock = pygame.time.Clock()
 
+        self.player = None
+
     def update(self, frame: int):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -77,6 +79,12 @@ class game:
     
     def get_mouse_pos(self):
         return [self.pos, self.last_pos]
+    
+    def set_player(self, player: Player):
+        self.player = player
+    
+    def get_player(self):
+        return self.player
 
     def mainloop(self):
         while True:
@@ -86,10 +94,11 @@ class game:
 
 def main():
     main_game = game((800, 800), "game", 20)
-    obj = Player([175, 175, 50, 50], (255, 0, 0))
-    main_game.add_object(obj)
+    player = Player([175, 175, 50, 50], (255, 0, 0))
     obj = Object([0, 750, 50, 50], (0, 0, 0))
+    main_game.add_object(Player)
     main_game.add_object(obj)
+    main_game.set_player(player)
     main_game.mainloop()
 
 if __name__ == "__main__":
