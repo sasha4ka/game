@@ -25,10 +25,10 @@ class objects_list:
     def get_hold_mouse(self) -> list:
         return self.master.get_hold_mouse()
     
-    def get_mouse_pos(self):
+    def get_mouse_pos(self) -> list:
         return self.master.get_mouse_pos()
     
-    def get_hold_keys(self):
+    def get_hold_keys(self) -> list:
         return self.master.get_hold_keys()
     
     def get_framerate(self) -> int:
@@ -40,7 +40,7 @@ class objects_list:
     def add_handler(self, handler: handler):
         self.master.add_handler(handler)
 
-    def get_platform_collide_list(self, object):
+    def get_platform_collide_list(self, object) -> list:
         collide_list = []
 
         for test_object in self.object_list:
@@ -49,7 +49,7 @@ class objects_list:
         
         return collide_list
     
-    def get_collide_list(self, object):
+    def get_collide_list(self, object) -> list:
         collide_list = []
 
         for test_object in self.object_list:
