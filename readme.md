@@ -1,2 +1,5 @@
-# super game on python
-I started this game the week ago
+# GUI-feature
+Здесь ведется разработка интерфейса и системы предметов.
+
+*Добавлен класс инвентаря
+*Добавлена система интерфейса
