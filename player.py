@@ -3,6 +3,7 @@ import pygame
 from handler import handler
 from object import Object
 from inventory import Inventory, Item
+import gui
 
 class Player(Object):
     def __init__(self, pos: list, color: list, speed=[0, 0], master = None):
@@ -13,7 +14,9 @@ class Player(Object):
         self.master = master
         self.tickrate = None
 
-        self.inventory: Inventory = Inventory(4)
+        self.inventory: Inventory = Inventory(1)
+        self.inventory_gui = gui.gui(self)
+        self.inventory_active = False
 
         self.onGround = False
         self.gravspeed = 0
@@ -56,13 +59,22 @@ class Player(Object):
         self.bottom = self.master.get_screensize()[1]
     
     def on_key(self, event: pygame.event.Event, frame: int):
-        if event.key != pygame.K_SPACE: return
-        if not self.onGround: return
-        self.gravspeed -= utils.jump_force
-        self.onGround = False
+        if event.key == pygame.K_SPACE:
+            if not self.onGround: return
+            self.gravspeed -= utils.jump_force
+            self.onGround = False
+        
+        elif event.key == pygame.K_e:
+            self.inventory_active = not self.inventory_active
 
     def gravity(self, frame):
         if not self.tickrate: return
         if self.onGround: return
 
         self.gravspeed += utils.g / self.tickrate
+
+    def draw(self, win: pygame.surface):
+        pygame.draw.rect(win, self.color, self.rect)
+        if self.inventory_active:
+            size = self.inventory_gui.size()
+            self.inventory_gui.draw(win, (self.rect.centerx-size[0]/2, self.rect.top - size[1]/2 - 40))

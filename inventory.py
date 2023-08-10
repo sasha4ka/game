@@ -28,3 +28,12 @@ class Inventory:
     
     def __str__(self) -> str:
         return "\n".join(f"{i}: {self.inventory[i]}" for i in range(len(self.inventory)) if self.inventory[i])
+    
+    def __len__(self) -> int:
+        return len(self.inventory)
+    
+    def __getitem__(self, key: int) -> Item:
+        return self.inventory[key]
+    
+    def __setitem__(self, key: int, value: Item):
+        self.inventory[key] = value

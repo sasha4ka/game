@@ -96,7 +96,7 @@ class game:
 def main():
     main_game = game((800, 800), "game", 20)
     player = Player([175, 175], (255, 0, 0))
-    player.inventory.set_item_by_index(Item(4, "gold"), 0)
+    player.inventory.set_item_by_index(Item(4, "empty"), 0)
     obj = Object([0, 750, 50, 50], (0, 0, 0))
     main_game.add_object(player)
     main_game.add_object(obj)
