@@ -2,17 +2,18 @@ import utils
 import pygame
 from handler import handler
 from object import Object
+from inventory import Inventory, Item
 
 class Player(Object):
-    def __init__(self, pos: list, color: list, type=1, speed=[0, 0], master = None):
-        pos[2] = 50
-        pos[3] = 70
-        self.rect = pygame.rect.Rect(*pos)
+    def __init__(self, pos: list, color: list, speed=[0, 0], master = None):
+        self.rect = pygame.rect.Rect(*pos, 50, 70)
         self.color = color
         self.speed = speed
-        self.type = type
+        self.type = 1
         self.master = master
         self.tickrate = None
+
+        self.inventory: Inventory = Inventory(4)
 
         self.onGround = False
         self.gravspeed = 0
@@ -21,9 +22,6 @@ class Player(Object):
     
     def update(self, frame: int):
         self.move()
-        
-        if frame == 0 and self.master.get_platform_collide_list(self):
-            print(f"Collide!")
 
         self.gravity(frame)
         self.rect.top += self.gravspeed
