@@ -15,12 +15,12 @@ class item_slot:
 
     def update(self):
         item_frame = pygame.image.load(textures.item_frame)
-        item_image = pygame.image.load(textures.items[self.item.id])
-        item_count = self.font.render(str(self.item.count), False, (0, 0, 0))
+        if self.item: item_image = pygame.image.load(textures.items[self.item.id])
+        if self.item: item_count = self.font.render(str(self.item.count), False, (0, 0, 0))
 
         self.surf = pygame.surface.Surface([50, 50])
         self.surf.blit(item_frame, [0, 0])
-        self.surf.blit(item_image, [1, 1])
+        if self.item: self.surf.blit(item_image, [1, 1])
         self.surf.blit(item_count, [39, 39])
 
 class gui:
