@@ -21,7 +21,7 @@ class item_slot:
         self.surf = pygame.surface.Surface([50, 50])
         self.surf.blit(item_frame, [0, 0])
         if self.item: self.surf.blit(item_image, [1, 1])
-        self.surf.blit(item_count, [39, 39])
+        if self.item: self.surf.blit(item_count, [39, 39])
 
 class gui:
     def __init__(self, player):
