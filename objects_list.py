@@ -4,15 +4,15 @@ from object import Object
 class objects_list:
     def __init__(self, master, objects=[]):
         self.master = master
-        self.object_list = objects
+        self.object_list: list[object] = objects
 
     def add_object(self, object: Object) -> int:
         object.master = self
         self.object_list.append(object)
         object.on_master_initilazed()
 
-    def remove_object(self, id: int):
-        pass
+    def remove_object(self, object: Object):
+        self.object_list.remove(object)
 
     def get_active_object(self) -> Object:
         active = None

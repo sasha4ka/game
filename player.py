@@ -1,17 +1,18 @@
 import utils
 import pygame
 from handler import handler
-from object import Object
+import object
 from inventory import Inventory, Item
 import gui
+import objects_list
 
-class Player(Object):
+class Player(object.Object):
     def __init__(self, pos: list, color: list, speed=[0, 0], master = None):
         self.rect = pygame.rect.Rect(*pos, 50, 70)
         self.color = color
         self.speed = speed
         self.type = 1
-        self.master = master
+        self.master: objects_list.objects_list = master
         self.tickrate = None
 
         self.inventory: Inventory = Inventory(1)

@@ -7,21 +7,23 @@ class item_slot:
     def __init__(self, item: Item):
         self.item = item
         self.surf: pygame.surface = None
-        self.font = pygame.font.Font(None, 8)
+        self.font = pygame.font.Font(None, 16)
 
     def draw(self) -> pygame.surface.Surface:
-        if not self.surf: self.update()
+        self.update()
         return self.surf
 
     def update(self):
         item_frame = pygame.image.load(textures.item_frame)
-        if self.item: item_image = pygame.image.load(textures.items[self.item.id])
-        if self.item: item_count = self.font.render(str(self.item.count), False, (0, 0, 0))
+        if self.item.id != "empty": 
+            item_image = pygame.image.load(textures.items[self.item.id])
+            if self.item.count != 1: item_count = self.font.render(str(self.item.count), False, (50, 50, 50))
 
         self.surf = pygame.surface.Surface([50, 50])
         self.surf.blit(item_frame, [0, 0])
-        if self.item: self.surf.blit(item_image, [1, 1])
-        if self.item: self.surf.blit(item_count, [39, 39])
+        if self.item.id != "empty": 
+            self.surf.blit(item_image, [1, 1])
+            if self.item.count != 1: self.surf.blit(item_count, [39, 39])
 
 class gui:
     def __init__(self, player):
@@ -34,7 +36,6 @@ class gui:
         if type(struct) == dict:
             if struct["type"] == "item-slot":
                 item = utils.link_parser(struct["link"], self)
-                print(item)
                 self.structure = [item_slot(item)]
                 self.structure[0].update()
 
@@ -49,7 +50,7 @@ class gui:
 
     def update(self):
         if not self.inited: self.compile(self.structure)
-        self.surface = self.structure[0].draw()           
+        self.surface = self.structure[0].draw()
 
     def size(self):
         if not self.surface: self.update()

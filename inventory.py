@@ -14,8 +14,17 @@ class Item:
 
 class Inventory: 
     def __init__(self, slots: int):
-        self.inventory: list[Item] = [None for i in range(slots)]
+        self.inventory: list[Item] = [Item(1) for _ in range(slots)]
         self.size = slots
+
+    def add(self, item: Item):
+        for i in range(len(self.inventory)):
+            if self.inventory[i].id == "empty":
+                self.inventory[i].id = item.id
+                self.inventory[i].count = item.count
+                return True
+            
+        return False
     
     def remove_item_by_index(self, index: int):
         self.inventory[index] = None

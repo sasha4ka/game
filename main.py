@@ -1,6 +1,7 @@
 import pygame
 import objects_list
-from object import Object
+from object import Object, Gravity_object
+from object import Item as Item_object
 from player import Player
 from handler import handler
 from inventory import Item, Inventory
@@ -96,10 +97,11 @@ class game:
 def main():
     main_game = game((800, 800), "game", 20)
     player = Player([175, 175], (255, 0, 0))
-    player.inventory.set_item_by_index(Item(4, "empty"), 0)
-    obj = Object([0, 750, 50, 50], (0, 0, 0))
+    item = Item_object(Item(13, "ball"), (500, 175))
+    grav_object = Gravity_object((0, 0, 0), (300, 200))
+    main_game.add_object(item)
     main_game.add_object(player)
-    main_game.add_object(obj)
+    main_game.add_object(grav_object)
     main_game.set_player(player)
     main_game.mainloop()
 
